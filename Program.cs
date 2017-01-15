@@ -18,10 +18,10 @@ namespace Myauth
                 .Build();
 
             var host = new WebHostBuilder()
+                .UseUrls("http://194.58.120.40:5000")
                 .UseConfiguration(config)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 
