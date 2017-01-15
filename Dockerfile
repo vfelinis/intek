@@ -10,8 +10,9 @@ WORKDIR /opt/intek/app
 
 # Copy the source and restore dependencies
 COPY . /opt/intek/app
-RUN dotnet restore
+RUN ["dotnet", "restore"]
+RUN ["dotnet", "build"]
 
 # Expose the port and start the app
-EXPOSE 5000
-CMD [ "dotnet", "run" ]
+EXPOSE 5000/tcp
+CMD ["dotnet", "run", "--server.urls", "http://*:5000"]
