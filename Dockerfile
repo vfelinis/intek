@@ -1,16 +1,13 @@
-FROM microsoft/dotnet:1.1.0-sdk-projectjson
+FROM microsoft/dotnet:latest
 
-RUN apt-get update
-RUN wget -qO- https://deb.nodesource.com/setup_4.x | bash -
-RUN apt-get install -y build-essential nodejs
+# Create directory for the app source code
+RUN mkdir -p /opt/intek/app
+WORKDIR /opt/intek/app
 
-COPY . /app
+# Copy the source and restore dependencies
+COPY . /opt/intek/app
+RUN dotnet restore
 
-WORKDIR /app
-
-RUN ["dotnet", "restore"]
-RUN ["dotnet", "build"]
-
-EXPOSE 5000/tcp
-
-CMD ["dotnet", "run", "--server.urls", "http://*:5000"]
+# Expose the port and start the app
+EXPOSE 5000
+CMD [ "dotnet", "run" ]
