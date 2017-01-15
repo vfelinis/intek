@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:latest
 
 RUN apt-get update
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | -E bash -
 RUN apt-get install -y build-essential nodejs
 
 # Create directory for the app source code
